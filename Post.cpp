@@ -15,15 +15,15 @@ Post::~Post() {
     }
 }
 
-string Post::getText() const {
+string Post::getText() {
     return text;
 }
 
-Media* Post::getMedia() const {
+Media* Post::getMedia() {
     return media;
 }
 
-ostream& operator<<(ostream& os, const Post& post) {
+ostream& operator<<(ostream& os, Post& post) {
     os << post.getText();
     if (post.getMedia() != nullptr) {
         os << " [";

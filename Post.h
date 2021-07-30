@@ -22,12 +22,12 @@ public:
     /**
      * Returns the text of the post.
      */
-    string getText() const;
+    string getText();
 
     /**
      * Returns the a pointer to the media of the post.
      */
-    Media* getMedia() const;
+    Media* getMedia();
 };
 
 /**
@@ -37,7 +37,7 @@ public:
  * @param post The post to print.
  * @return The ostream object.
  */
-ostream& operator<<(ostream& os, const Post& post);
+ostream& operator<<(ostream& os, Post& post);
 
 
 #endif /* POST_H_ */

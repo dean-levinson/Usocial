@@ -61,7 +61,7 @@ int main()
     }
     
     u5->addFriend(u4);
-    
+
     // Test RemoveUser.
     us.removeUser(u1);
     std::cout << "Liron shouldn't be in the friends list:" << std::endl;
@@ -72,7 +72,7 @@ int main()
     u3->addFriend(u5);
     u3->sendMessage(u5, new Message("All your base are belong to us"));
 
-    // Test messages handling
+    // Test messages mechanism.
     u5->viewReceivedMessages();
 
     return 0;

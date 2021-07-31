@@ -22,11 +22,15 @@ int main()
     std::cout << "Should be True: " << u5->isFriend(u1) << std::endl;
     std::cout << "Should be False: " << u5->isFriend(u4) << std::endl;
 
+    // Test friends and posts mechanism.
     u5->viewFriendsPosts(); // should see only u1, u2 s' posts
+
     u4->sendMessage(u5, new Message("Buy Falafel!"));
+
+    // Test messages mechanism.
     u5->viewReceivedMessages();
 
-    // Test removeFriend
+    // Test removeFriend excpetion.
     try {
         u5->removeFriend(u3);
     }
@@ -34,7 +38,7 @@ int main()
         std::cout << "error: " << e.what() << std::endl;
     }
     
-    // Test addFriend
+    // Test addFriend exception.
     try {
         u5->addFriend(u1);
     }
@@ -42,14 +46,14 @@ int main()
         std::cout << "error: " << e.what() << std::endl;
     }
 
-    // Test getUserById
+    // Test getUserById excpetion.
     try {
         us.getUserById(100);
     } catch (const std::exception& e) {
         std::cout << "error: " << e.what() << std::endl;
     }
     
-    // Test RemoveUser
+    // Test RemoveUser.
     us.removeUser(u1);
     std::cout << "Liron shouldn't be in the friends list:" << std::endl;
     u5->viewFriends();
@@ -58,6 +62,8 @@ int main()
     u5->viewReceivedMessages();
     u3->addFriend(u5);
     u3->sendMessage(u5, new Message("All your base are belong to us"));
+
+    // Test messages handling
     u5->viewReceivedMessages();
 
     return 0;

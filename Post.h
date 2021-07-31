@@ -25,7 +25,7 @@ public:
     string getText();
 
     /**
-     * Returns the a pointer to the media of the post.
+     * Returns the a pointer to the media of the post. If there is not media in the post, returns nullptr.
      */
     Media* getMedia();
 };

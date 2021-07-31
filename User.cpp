@@ -2,6 +2,8 @@
 #include <string>
 #include <list>
 #include <memory>
+#include <algorithm>
+#include <stdexcept>
 #include "User.h"
 
 using namespace std;
@@ -28,11 +30,23 @@ string User::getName() {
     return name;
 };
 
+bool User::isFriend(User* other) {
+    return (count(friends.begin(), friends.end(), other->getId()) > 0);
+};
+
 void User::addFriend(User* other) {
+    if (isFriend(other)) {
+        throw logic_error( other->name + " is already in the friends list" );
+    }
+
     friends.push_back(other->id);
 };
 
 void User::removeFriend(User* other) {
+    if (!isFriend(other)) {
+        throw logic_error( other->name + " is not in the friends list" );
+    }
+
     friends.remove(id);
 };
 
@@ -65,6 +79,14 @@ void User::viewFriendsPosts() {
             cout << friend_user->name << " post: " << (*(*second_it)) << endl;
         };
     };
+};
+
+void User::viewFriends() {
+    for_each(friends.begin(), friends.end(), [this](unsigned long id) {
+            if (this->us->isIdExists(id)) {
+                cout << this->us->getUserById(id)->getName() << endl; 
+            };
+    });
 };
 
 void User::receiveMessage(Message* message) {

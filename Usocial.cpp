@@ -1,5 +1,6 @@
 #include <string>
 #include <list>
+#include <stdexcept>
 #include "Usocial.h"
 
 Usocial::~Usocial() {
@@ -41,20 +42,37 @@ User* Usocial::registerUser(string name, bool is_business_account) {
 }
 
 void Usocial::removeUser(User* user) {
-    /* todo: validate that the user is not in the list */
-    /* todo: what if he is a friend of someone?
-     maybe we should iterate over all of the users
-     and delete the friend*/
+    bool is_found = false;
+
     for (auto it = users.begin(); it != users.end(); ++it) {
         if (it->second == user) {
-            users.erase(it);        
-            break;
+            is_found = true;
+            // Delete the user from all the friends lists he is in.
+            // We would iterate over the user we want to delete but it's OK because he won't be in his own friends list.
+            for (auto second_it = users.begin(); second_it != users.end(); ++second_it) {
+                if (second_it->second->isFriend(it->second)) {
+                    second_it->second->removeFriend(it->second);
+                };
+            }
+            users.erase(it); // Delete the user from the social media.
+            break; // Exit for loop.
         }
+    }
+
+    if (!is_found) {
+        throw logic_error( "The user is not part of the social media");
     }
 }
 
 User* Usocial::getUserById(unsigned long id) {
-    /* todo: validate that the user exists */
+    if (!isIdExists(id)) {
+        throw logic_error( "The ID does not exist in the social media");
+    };
+
     auto it = users.find(id);
     return it->second;
+}
+
+bool Usocial::isIdExists(unsigned long id) {
+    return (users.count(id) > 0);
 }

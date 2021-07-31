@@ -28,19 +28,24 @@ public:
     User* registerUser(string name, bool is_business_user  = false);
 
     /**
-     * Removes a user from the social media.
+     * Removes a user from the social media. Raises logic_error if the user is not exists.
      * 
      * @param user - A pointer to the user who needs to remove.
      */
     void removeUser(User* user);
 
     /**
-     * Gets a user By his id.
+     * Gets a user By his id. Raises logic_error if there is not user with such id.
      * 
      * @param id - the id of the user
      * @return The user object.
      */
     User* getUserById(unsigned long id);
+
+    /**
+     * Returns weather there is user with this ID in the social media.
+     */
+    bool isIdExists(unsigned long id);
 };
 
 #endif /* USOCIAL_H_ */

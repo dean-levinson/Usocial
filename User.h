@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <exception>
 #include "Post.h"
 #include "Message.h"
 #include "Media.h"
@@ -43,18 +44,25 @@ public:
     string getName();
 
     /**
-     * Add a friend to the user.
+     * Returns weather the other user is in the friends list. 
      * 
-     * @param userFriend The friend you want to add to the user.
+     * @param other - The other user.
      */
-    void addFriend(User* userFriend);
+    bool isFriend(User* other);
 
     /**
-     * Removes a friend from the user.
+     * Add a friend to the user. Raises logic_error if this user is already in the friends list.
      * 
-     * @param userFriend the friend who should be removed.
+     * @param other The friend you want to add to the user.
      */
-    void removeFriend(User* userFriend);
+    void addFriend(User* other);
+
+    /**
+     * Removes a friend from the user. Raises logic_error if this user is not in the friends list.
+     * 
+     * @param other the friend who should be removed.
+     */
+    void removeFriend(User* other);
 
     /**
      * Posts a text in the user's feed.
@@ -84,6 +92,12 @@ public:
      */
     void viewFriendsPosts();
 
+    /**
+     * Prints all the friends of the user by name.
+     * 
+     */
+    void viewFriends();
+    
     /**
      * Receive a new message into Received Messages.
      * 

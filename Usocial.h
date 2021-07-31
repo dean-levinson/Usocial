@@ -29,8 +29,9 @@ public:
 
     /**
      * Removes a user from the social media. Raises logic_error if the user is not exists.
+     * If the user is in the friends list of other users, removes him from there.
      * 
-     * @param user - A pointer to the user who needs to remove.
+     * @param user - A pointer to the user who needs to be removed from the us.
      */
     void removeUser(User* user);
 

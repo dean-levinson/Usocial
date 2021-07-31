@@ -39,6 +39,10 @@ void User::addFriend(User* other) {
         throw logic_error( other->name + " is already in the friends list" );
     }
 
+    if (other->id == id) {
+        throw logic_error( "A user cannot be a friend of himself" );
+    }
+
     friends.push_back(other->id);
 };
 

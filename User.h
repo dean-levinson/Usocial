@@ -51,7 +51,8 @@ public:
     bool isFriend(User* other);
 
     /**
-     * Add a friend to the user. Raises logic_error if this user is already in the friends list.
+     * Add a friend to the user. Raises logic_error if this user is already in the friends list,
+     *  or if other is himself (User connot be a friend of himself).
      * 
      * @param other The friend you want to add to the user.
      */
@@ -97,7 +98,7 @@ public:
      * 
      */
     void viewFriends();
-    
+
     /**
      * Receive a new message into Received Messages.
      * 

@@ -38,9 +38,16 @@ int main()
         std::cout << "error: " << e.what() << std::endl;
     }
     
-    // Test addFriend exception.
+    // Test addFriend exceptions.
     try {
         u5->addFriend(u1);
+    }
+    catch (const std::exception& e) {
+        std::cout << "error: " << e.what() << std::endl;
+    }
+
+    try {
+        u5->addFriend(u5);
     }
     catch (const std::exception& e) {
         std::cout << "error: " << e.what() << std::endl;
@@ -52,6 +59,8 @@ int main()
     } catch (const std::exception& e) {
         std::cout << "error: " << e.what() << std::endl;
     }
+    
+    u5->addFriend(u4);
     
     // Test RemoveUser.
     us.removeUser(u1);

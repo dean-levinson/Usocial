@@ -97,9 +97,16 @@ void User::receiveMessage(Message* message) {
     receivedMsgs.push_back(message);
 };
 
-void User::sendMessage(User* target, Message* message) {
+void User::_sendMessage(User* target, Message* message) {
     message->add_author(name);
     target->receiveMessage(message);
+};
+
+void User::sendMessage(User* target, Message* message) {
+    if (!isFriend(target)) {
+        throw logic_error("Regular user cannot send a message to a none friend user");
+    }
+    _sendMessage(target, message);
 };
 
 void User::viewReceivedMessages() {
@@ -112,6 +119,6 @@ void User::viewReceivedMessages() {
 BusinessUser::BusinessUser() {};
 
 void BusinessUser::sendMessage(User* target, Message* message) {
-    message->add_author("Business user " + name);
-    target->receiveMessage(message);
+    // Sends without validations
+    _sendMessage(target, message);
 }

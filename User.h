@@ -28,6 +28,15 @@ protected:
     User();
     virtual ~User();
 
+     /**
+     * Sends a message to a user without validations.
+     * 
+     * @param target - the target user.
+     * @param message - The message to send.
+     */
+    void _sendMessage(User* target, Message* message);
+
+
 public:
     /**
      * Returns the Id of the user
@@ -107,7 +116,7 @@ public:
     void receiveMessage(Message* message);
 
     /**
-     * Sends a message to a user.
+     * Sends a message to a user, only if the user is a friend of the sender.
      * 
      * @param target - the target user.
      * @param message - The message to send.
@@ -130,7 +139,7 @@ protected:
 
 public:
     /**
-     * Sends a message to a user.
+     * Sends a message to a user without checking wether he is in the friends list.
      * 
      * @param user - The user who suppuse to get the message.
      * @param message - The message that should be send.

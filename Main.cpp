@@ -59,6 +59,16 @@ int main()
     } catch (const std::exception& e) {
         std::cout << "error: " << e.what() << std::endl;
     }
+
+    // Test SendMessage excpetion.
+    try {
+        u3->sendMessage(u5, new Message("Hello there!, although you are not my friend..."));
+    } catch (const std::exception& e) {
+        std::cout << "error: " << e.what() << std::endl;
+    }
+
+    // Test BusinessUser sendMessage.
+    u4->sendMessage(u5, new Message("Hello there!, although you are not my friend..."));
     
     u5->addFriend(u4);
 
